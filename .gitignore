@@ -1,0 +1,13 @@
+node_modules
+.vscode
+.next
+electron/node_modules
+electron/package-lock.json
+
+# environment variables
+.env
+.env.*
+*.env
+.env*.local
+next-env.d.ts
+electron/env
