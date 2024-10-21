@@ -11,3 +11,4 @@ electron/package-lock.json
 .env*.local
 next-env.d.ts
 electron/env
+tsconfig.tsbuildinfo
