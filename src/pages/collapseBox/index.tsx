@@ -10,7 +10,7 @@ type CollapseBoxProp = {
 /**
  * @brief The collapsable box has a "show" button to display the hidden content.
  * Instead of having a isOpen state unique to each component, we've passed a isOpen prop from the parent.
- * This is so that the parent has the ability controls which instance of box it wasn't open.
+ * This is so that the parent has the ability controls which instance of box it wants open.
  * @ref https://react.dev/learn/sharing-state-between-components
  */
 const CollapseBox: FC<CollapseBoxProp> = ({
