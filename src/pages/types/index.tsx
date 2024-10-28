@@ -38,28 +38,31 @@ function literalType(){
     // method = "PUT";  // Error
 }
 
-function nonNullOperator(){
-    // Asserts that randomVariable would not be null bypassing the compile time check.
-    const randomVariable = { name: "Sagar" };
-    randomVariable!.name;
+function nullAndUndefinedType(){
+    // null and undefined : Primitive values provided by JS. absent & uninitialised.
 }
 
-/** 
- * @ref https://stackoverflow.com/a/57472750/22622355
- * */
-function neverType(){
+function neverType(){    
     // A void function returns undefined.
     const a = () => {};
     console.log(a());   
 
     // A never function doesn't have a normal completion, which means it throws an error or never finishes running at all.
     const b = () : never => { throw new Error("Random Error")}
+
+    // Ref: https://stackoverflow.com/a/57472750/22622355
 }
 
 function optionalType(){
     const point : { x : number; y: number; z?: number } = { x: 5, y: 6};
     // z is an optional parameter and can be undefined. so it must be checked before accessing
     // if(point.z != undefined) console.log(point.z)
+}
+
+function nonNullOperator(){
+    // Asserts that randomVariable would not be null bypassing the compile time check.
+    const randomVariable = { name: "Sagar" };
+    randomVariable!.name;
 }
 
 const Types: FC = () => { return <></>};

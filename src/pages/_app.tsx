@@ -4,10 +4,11 @@
  * @refer https://nextjs.org/docs/pages/building-your-application/routing/custom-app
  */
 import type { AppProps } from 'next/app'
+import "../styles/global.css"
  
 export default function App({ Component, pageProps }: AppProps) {
   return (
-      <div style={{padding: 10, backgroundColor: "green"}}> 
+      <div> 
           <Component {...pageProps} />  {/* Currently active page */}
       </div>
     );

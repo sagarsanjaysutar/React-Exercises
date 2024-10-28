@@ -1,13 +1,19 @@
 /**
- * @brief The home page. 
+ * @brief The home page.
  * @notes
- * - This page gets automatically detected by Next.js development server.
- * - JSX is javascript's syntax extension which allows writing html in JS file.
- * - import React from "react": "React" is where JSX syntax is defined.
+ * - This page gets automatically detected by Next.js development server. * -
  */
-import React, {FC} from "react"; 
+import React, { FC } from 'react'
+import Form from './form'
+import MovingDot from './movingDot'
+import CollapseBox from './collapseBox'
 
+const Root: FC = () => (
+    <>
+        <CollapseBox />
+        {/* <MovingDot /> */}
+        <Form />
+    </>
+)
 
-const LoadScreen: FC = () => { return <h1>Sagar</h1> }
-
-export default LoadScreen;
+export default Root
