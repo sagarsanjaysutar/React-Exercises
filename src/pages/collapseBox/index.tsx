@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
 import styles from './collapseBox.module.css'
+import { Button } from 'antd'
 
 type CollapseBoxProp = {
     isOpen: boolean
@@ -25,7 +26,7 @@ const CollapseBox: FC<CollapseBoxProp> = ({
             {isOpen ? (
                 <p>{children}</p>
             ) : (
-                <button onClick={onOpen}>Show</button>
+                <Button onClick={onOpen}>Show</Button>
             )}
         </section>
     )
