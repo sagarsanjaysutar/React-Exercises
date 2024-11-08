@@ -1,13 +1,14 @@
-import React, { FC, useState } from 'react'
-import styles from './collapseBox.module.css'
-import { Button } from 'antd'
+import React, { FC, useState } from 'react';
+import styles from './collapseBox.module.css';
+import { Button } from 'antd';
+import { ScriptProps } from 'next/script';
 
 type CollapseBoxProp = {
-    isOpen: boolean
-    onOpen: () => void
-    title: string
-    children: React.ReactNode
-}
+    isOpen: boolean;
+    onOpen: () => void;
+    title: string;
+    children: React.ReactNode;
+};
 /**
  * @brief The collapsable box has a "show" button to display the hidden content.
  * Instead of having a isOpen state unique to each component, we've passed a isOpen prop from the parent.
@@ -21,7 +22,7 @@ const CollapseBox: FC<CollapseBoxProp> = ({
     children,
 }: CollapseBoxProp) => {
     return (
-        <section className={styles.panel}>
+        <section className={styles['panel']}>
             <h3>{title}</h3>
             {isOpen ? (
                 <p>{children}</p>
@@ -29,14 +30,14 @@ const CollapseBox: FC<CollapseBoxProp> = ({
                 <Button onClick={onOpen}>Show</Button>
             )}
         </section>
-    )
-}
+    );
+};
 
 const Container: FC = () => {
-    const [activeBoxIndex, setActiveBoxIndex] = useState(0)
+    const [activeBoxIndex, setActiveBoxIndex] = useState(1);
     return (
-        <>
-            <h2>Random Information</h2>
+        <div className="bg-slate-500 p-5">
+            <h2 className="text-lg">Random Information</h2>
             <CollapseBox
                 title="Section Zero"
                 isOpen={activeBoxIndex == 0}
@@ -51,8 +52,8 @@ const Container: FC = () => {
             >
                 Random Information about section One.
             </CollapseBox>
-        </>
-    )
-}
+        </div>
+    );
+};
 
-export default Container
+export default Container;

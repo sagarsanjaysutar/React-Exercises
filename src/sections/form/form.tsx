@@ -1,5 +1,5 @@
-import React, { FC, FormEvent, useState } from 'react'
-import style from './form.module.css'
+import React, { FC, FormEvent, useState } from 'react';
+import style from './form.module.css';
 
 /**
  * @brief Practices to follow while working with react states.
@@ -8,44 +8,44 @@ import style from './form.module.css'
 const Form: FC = () => {
     // By not making a state for fullName (which can be calculated using existing states),
     // we have avoided making a redundant state.
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const fullName = firstName + ' ' + lastName
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const fullName = firstName + ' ' + lastName;
 
     // By not making flags for each status, e.g. isSuccess, isError, etc. we have avoided
     // contradictory state where isSuccess & isError may accidentally become true.
-    type FormStatus = 'submitting' | 'success' | 'error' | 'typing'
-    const [formStatus, setFormStatus] = useState<FormStatus>('typing')
+    type FormStatus = 'submitting' | 'success' | 'error' | 'typing';
+    const [formStatus, setFormStatus] = useState<FormStatus>('typing');
 
     // We've grouped related states together.
-    type Contact = { email: string; phone: string }
+    type Contact = { email: string; phone: string };
     const [contactInfo, setContactInfo] = useState<Contact>({
         email: '',
         phone: '',
-    })
+    });
 
     const verifyName = (fullName: string) => {
         return new Promise<void>((resolve, reject) => {
             setTimeout(() => {
-                fullName.match(/[^a-zA-Z]/g) ? reject() : resolve()
-            }, 1500)
-        })
-    }
+                fullName.match(/[^a-zA-Z]/g) ? reject() : resolve();
+            }, 1500);
+        });
+    };
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        setFormStatus('submitting')
+        event.preventDefault();
+        setFormStatus('submitting');
         try {
-            await verifyName(fullName)
-            setFormStatus('success')
+            await verifyName(fullName);
+            setFormStatus('success');
         } catch {
-            setFormStatus('error')
+            setFormStatus('error');
         }
-    }
+    };
 
     return (
-        <>
-            <h2>Quiz</h2>
+        <div className="bg-slate-600 p-5">
+            <h2 className="text-lg">Quiz</h2>
             <div className={style.container}>
                 <p>Please fill in your info.</p>
 
@@ -116,8 +116,8 @@ const Form: FC = () => {
                     )}
                 </form>
             </div>
-        </>
-    )
-}
+        </div>
+    );
+};
 
-export default Form
+export default Form;
