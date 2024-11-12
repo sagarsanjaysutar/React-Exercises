@@ -1,37 +1,41 @@
 /**
  * @brief The home page.
- * @notes
  */
-import React, { FC, useState } from 'react';
-import Form from '@/sections/form/form';
-import CollapseBox from '@/sections/collapseBox';
+import React, { FC, ReactNode, useState } from 'react';
+
 import { Layout, Tabs, TabsProps } from 'antd';
 
-import './home.module.css';
+import Styles from './home.module.css';
+
+import MenuBar from '@/components/menuBar/menuBar';
+import ContentContainer from '@/components/content/content';
 
 const { Sider, Header, Footer, Content } = Layout;
 
+const HomeContent: FC = () => {
+    return <h1>Default Home Content</h1>;
+};
+
 const Home: FC = () => {
-    const tabs: TabsProps['items'] = [
-        { label: 'Tab 1', key: '1', children: `Content x` },
-        { label: 'Tab 2', key: '2', children: `Content f` },
-    ];
+    // Default content is Home.
+    const [content, setContent] = useState<ReactNode>(<HomeContent />);
+    const [menuBarWidth, setMenuBarWidth] = useState('12vw');
+
     return (
-        <>
-            <Header className="text-black text-lg bg-slate-100 flex justify-center items-center">
-                React Exercises
-            </Header>
-            <Layout>
-                <Sider className={'sider bg-slate-700'}>
-                    <Tabs size="large" tabPosition="left" items={tabs} />
-                </Sider>
-                <Content>
-                    <CollapseBox />
-                    <Form />
-                </Content>
-            </Layout>
-            <Footer className="bg-slate-500"> Footer </Footer>
-        </>
+        <Layout>
+            <Sider width={menuBarWidth}>
+                <MenuBar
+                    width={menuBarWidth}
+                    onSelect={(content) => setContent(content)}
+                    onTitlePressed={() => {
+                        setContent(<HomeContent />);
+                    }}
+                />
+            </Sider>
+            <Content style={{ height: '100vh' }}>
+                <ContentContainer content={content} />
+            </Content>
+        </Layout>
     );
 };
 
