@@ -1,21 +1,25 @@
 import React, { FC, FormEvent, useState } from 'react';
-import style from './form.module.css';
+import type { FormProps } from 'antd';
+import style from './quiz.module.css';
+import { Button, Input, Form } from 'antd';
 
 /**
  * @brief Practices to follow while working with react states.
  * @ref https://react.dev/learn/choosing-the-state-structure
  */
-const Form: FC = () => {
+const Quiz: FC = () => {
     // By not making a state for fullName (which can be calculated using existing states),
     // we have avoided making a redundant state.
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const fullName = firstName + ' ' + lastName;
-
-    // By not making flags for each status, e.g. isSuccess, isError, etc. we have avoided
-    // contradictory state where isSuccess & isError may accidentally become true.
-    type FormStatus = 'submitting' | 'success' | 'error' | 'typing';
-    const [formStatus, setFormStatus] = useState<FormStatus>('typing');
+    const verifyName = (fullName: string) => {
+        return new Promise<void>((resolve, reject) => {
+            setTimeout(() => {
+                fullName.match(/[^a-zA-Z\s]/g) ? reject() : resolve();
+            }, 1500);
+        });
+    };
 
     // We've grouped related states together.
     type Contact = { email: string; phone: string };
@@ -24,16 +28,20 @@ const Form: FC = () => {
         phone: '',
     });
 
-    const verifyName = (fullName: string) => {
-        return new Promise<void>((resolve, reject) => {
-            setTimeout(() => {
-                fullName.match(/[^a-zA-Z]/g) ? reject() : resolve();
-            }, 1500);
+    const resetForm = () => {
+        setFirstName('');
+        setLastName('');
+        setContactInfo({
+            email: '',
+            phone: '',
         });
     };
 
-    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    // By not making flags for each status, e.g. isSuccess, isError, etc. we have avoided
+    // contradictory state where isSuccess & isError may accidentally become true.
+    type FormStatus = 'submitting' | 'success' | 'error' | 'typing';
+    const [formStatus, setFormStatus] = useState<FormStatus>('typing');
+    const handleSubmit: FormProps['onFinish'] = async () => {
         setFormStatus('submitting');
         try {
             await verifyName(fullName);
@@ -44,34 +52,34 @@ const Form: FC = () => {
     };
 
     return (
-        <div className="bg-slate-600 p-5">
+        <div className="bg-slate-50 p-5">
             <h2 className="text-lg">Quiz</h2>
             <div className={style.container}>
                 <p>Please fill in your info.</p>
 
-                <form
-                    onSubmit={handleSubmit}
+                <Form
+                    onFinish={handleSubmit}
                     style={{
                         display: 'grid',
                         gap: '5px',
                         gridTemplateColumns: `repeat(2, 1fr)`,
                     }}
                 >
-                    <input
+                    <Input
                         type="text"
                         disabled={formStatus == 'submitting'}
                         placeholder="First Name"
                         value={firstName}
                         onChange={(value) => setFirstName(value.target.value)}
                     />
-                    <input
+                    <Input
                         type="text"
                         disabled={formStatus == 'submitting'}
                         placeholder="Last Name"
                         value={lastName}
                         onChange={(value) => setLastName(value.target.value)}
                     />
-                    <input
+                    <Input
                         type="text"
                         disabled={formStatus == 'submitting'}
                         placeholder="Email"
@@ -83,7 +91,7 @@ const Form: FC = () => {
                             })
                         }
                     />
-                    <input
+                    <Input
                         type="text"
                         disabled={formStatus == 'submitting'}
                         placeholder="Phone"
@@ -95,15 +103,26 @@ const Form: FC = () => {
                             })
                         }
                     />
-                    <button
-                        type="submit"
-                        style={{ gridColumn: `span 2` }}
+
+                    <Button
+                        variant="filled"
                         disabled={
                             formStatus == 'submitting' || firstName.length == 0
                         }
+                        onClick={resetForm}
+                    >
+                        Reset
+                    </Button>
+                    <Button
+                        variant="filled"
+                        type="primary"
+                        disabled={
+                            formStatus == 'submitting' || firstName.length == 0
+                        }
+                        htmlType="submit"
                     >
                         Submit
-                    </button>
+                    </Button>
 
                     {formStatus == 'success' && (
                         <p style={{ color: 'green' }}>
@@ -114,10 +133,10 @@ const Form: FC = () => {
                     {formStatus == 'error' && (
                         <p style={{ color: 'red' }}> Error! </p>
                     )}
-                </form>
+                </Form>
             </div>
         </div>
     );
 };
 
-export default Form;
+export default Quiz;

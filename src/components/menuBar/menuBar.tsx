@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
-import Form from '@/sections/form/form';
+import Form from '@/sections/quiz/quiz';
 import CollapseBox from '@/sections/collapseBox';
 import Maps from '@/sections/maps/maps';
 import { Drawer, List, Typography } from 'antd';
@@ -39,7 +39,7 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
         },
         {
             key: '2',
-            label: 'Form',
+            label: 'Quiz',
             onClick: (key) => {
                 onSelect(<Form />);
                 setActiveMenuItemKey(key);
