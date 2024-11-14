@@ -1,39 +1,69 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 import Form from '@/sections/form/form';
 import CollapseBox from '@/sections/collapseBox';
-import { headers } from 'next/headers';
+import Maps from '@/sections/maps/maps';
 import { Drawer, List, Typography } from 'antd';
 
 type MenuBarProp = {
     width: string;
     onSelect: (content: ReactNode) => void;
-    onTitlePressed: (pressed: boolean) => void;
 };
 
-const MenuBar: FC<MenuBarProp> = ({ width, onSelect, onTitlePressed }) => {
+const HomeContent: FC = () => {
+    return <h1>Default Home Content</h1>;
+};
+
+const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
+    // Menu Items.
     type MenuItem = {
         key: string;
         label: string;
-        onClick?: () => void;
+        onClick: (key: string) => void;
     };
-
     const menuItems: MenuItem[] = [
+        {
+            key: '0',
+            label: 'Home',
+            onClick: (key) => {
+                onSelect(<HomeContent />);
+                setActiveMenuItemKey(key);
+            },
+        },
         {
             key: '1',
             label: 'Collapse Box',
-            onClick: () => onSelect(<CollapseBox />),
+            onClick: (key) => {
+                onSelect(<CollapseBox />);
+                setActiveMenuItemKey(key);
+            },
         },
         {
             key: '2',
             label: 'Form',
-            onClick: () => onSelect(<Form />),
+            onClick: (key) => {
+                onSelect(<Form />);
+                setActiveMenuItemKey(key);
+            },
+        },
+        {
+            key: '3',
+            label: 'Maps',
+            onClick: (key) => {
+                onSelect(<Maps />);
+                setActiveMenuItemKey(key);
+            },
         },
     ];
-    const [drawerOpen, setDrawerOpen] = useState(true);
+
+    // A flag that keeps track of the active MenuItem.
+    const [activeMenuItemKey, setActiveMenuItemKey] = useState(
+        menuItems[0].key
+    );
 
     // Only set drawer open after mount (client-side).
     // This is done because NextJS gives the following warning:
     // Warning: Drawer with 'open' in SSR is not work since no place to createPortal. Please move to 'useEffect' instead
+    const [drawerOpen, setDrawerOpen] = useState(true);
     useEffect(() => {
         setDrawerOpen(true);
     }, []);
@@ -65,22 +95,26 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect, onTitlePressed }) => {
                 }}
             >
                 <List
-                    header={
-                        <h1
-                            className="px-3 font-bold"
-                            onClick={() => onTitlePressed(true)}
-                        >
-                            Home
-                        </h1>
-                    }
                     dataSource={menuItems}
                     renderItem={(menuItem) => (
                         <List.Item
-                            onClick={menuItem.onClick}
+                            onClick={() => {
+                                menuItem.onClick(menuItem.key);
+                            }}
                             key={menuItem.key}
-                            className="text-blue-950 bg-yellow-200"
+                            className={`text-blue-950 ${
+                                menuItem.key == activeMenuItemKey // Active Item is of different color.
+                                    ? 'bg-yellow-200'
+                                    : 'bg-yellow-500'
+                            }`}
                         >
-                            <span className="px-3">{menuItem.label}</span>
+                            <span
+                                className={`px-3 cursor-default ${
+                                    menuItem.key == '0' ? 'font-bold' : '' // Home Item is bold
+                                }`}
+                            >
+                                {menuItem.label}
+                            </span>
                         </List.Item>
                     )}
                 />

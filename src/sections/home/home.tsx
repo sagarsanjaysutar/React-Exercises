@@ -27,9 +27,6 @@ const Home: FC = () => {
                 <MenuBar
                     width={menuBarWidth}
                     onSelect={(content) => setContent(content)}
-                    onTitlePressed={() => {
-                        setContent(<HomeContent />);
-                    }}
                 />
             </Sider>
             <Content style={{ height: '100vh' }}>
