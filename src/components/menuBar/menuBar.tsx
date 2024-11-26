@@ -1,6 +1,6 @@
 import React, { FC, ReactNode, useEffect, useState } from 'react';
 import Form from '@/sections/quiz/quiz';
-import CollapseBox from '@/sections/collapseBox';
+import CollapseBox from '@/sections/collapseBox/collapseBox';
 import Maps from '@/sections/maps/maps';
 import { Drawer, List, Typography } from 'antd';
 

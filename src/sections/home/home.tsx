@@ -1,5 +1,7 @@
 /**
  * @brief The home page.
+ * Antd layout design is followed here.
+ * @ref https://ant.design/components/layout#examples
  */
 import React, { FC, ReactNode, useState } from 'react';
 
@@ -7,7 +9,6 @@ import { Layout, Tabs, TabsProps } from 'antd';
 
 import MenuBar from '@/components/menuBar/menuBar';
 import ContentContainer from '@/components/content/content';
-import validators from '@/sections/maps/coordinateValidators';
 
 const { Sider, Header, Footer, Content } = Layout;
 

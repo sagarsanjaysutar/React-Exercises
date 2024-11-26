@@ -1,3 +1,7 @@
+/**
+ * @brief Sharing State Between Components
+ * @ref https://react.dev/learn/sharing-state-between-components
+ */
 import React, { FC, useState } from 'react';
 import styles from './collapseBox.module.css';
 import { Button } from 'antd';
@@ -9,11 +13,11 @@ type CollapseBoxProp = {
     title: string;
     children: React.ReactNode;
 };
+
 /**
  * @brief The collapsable box has a "show" button to display the hidden content.
  * Instead of having a isOpen state unique to each component, we've passed a isOpen prop from the parent.
  * This is so that the parent has the ability controls which instance of box it wants open.
- * @ref https://react.dev/learn/sharing-state-between-components
  */
 const CollapseBox: FC<CollapseBoxProp> = ({ isOpen, onOpen, title, children }: CollapseBoxProp) => {
     return (

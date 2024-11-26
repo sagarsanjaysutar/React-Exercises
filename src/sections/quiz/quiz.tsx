@@ -4,8 +4,9 @@ import style from './quiz.module.css';
 import { Button, Input, Form } from 'antd';
 
 /**
- * @brief Practices to follow while working with react states.
+ * @brief Reacting to Input with State & Choosing the State Structure.
  * @ref https://react.dev/learn/choosing-the-state-structure
+ * @ref https://react.dev/learn/reacting-to-input-with-state
  */
 const Quiz: FC = () => {
     // By not making a state for fullName (which can be calculated using existing states),
