@@ -56,9 +56,7 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
     ];
 
     // A flag that keeps track of the active MenuItem.
-    const [activeMenuItemKey, setActiveMenuItemKey] = useState(
-        menuItems[0].key
-    );
+    const [activeMenuItemKey, setActiveMenuItemKey] = useState(menuItems[0].key);
 
     // Only set drawer open after mount (client-side).
     // This is done because NextJS gives the following warning:

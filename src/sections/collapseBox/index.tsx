@@ -15,20 +15,11 @@ type CollapseBoxProp = {
  * This is so that the parent has the ability controls which instance of box it wants open.
  * @ref https://react.dev/learn/sharing-state-between-components
  */
-const CollapseBox: FC<CollapseBoxProp> = ({
-    isOpen,
-    onOpen,
-    title,
-    children,
-}: CollapseBoxProp) => {
+const CollapseBox: FC<CollapseBoxProp> = ({ isOpen, onOpen, title, children }: CollapseBoxProp) => {
     return (
         <section className={styles['panel']}>
             <h3>{title}</h3>
-            {isOpen ? (
-                <p>{children}</p>
-            ) : (
-                <Button onClick={onOpen}>Show</Button>
-            )}
+            {isOpen ? <p>{children}</p> : <Button onClick={onOpen}>Show</Button>}
         </section>
     );
 };

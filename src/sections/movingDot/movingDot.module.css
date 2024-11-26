@@ -1,4 +1,4 @@
-.container{
+.container {
     position: relative;
     width: 50vw;
     height: 50vh;
@@ -10,10 +10,10 @@
     background-color: #16181d;
 }
 
-.dot{
+.dot {
     position: absolute;
-    width: 20px; 
-    height: 20px; 
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background-color: #52b4ca;
     left: -10;

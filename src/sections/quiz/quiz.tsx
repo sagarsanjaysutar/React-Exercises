@@ -106,9 +106,7 @@ const Quiz: FC = () => {
 
                     <Button
                         variant="filled"
-                        disabled={
-                            formStatus == 'submitting' || firstName.length == 0
-                        }
+                        disabled={formStatus == 'submitting' || firstName.length == 0}
                         onClick={resetForm}
                     >
                         Reset
@@ -116,23 +114,16 @@ const Quiz: FC = () => {
                     <Button
                         variant="filled"
                         type="primary"
-                        disabled={
-                            formStatus == 'submitting' || firstName.length == 0
-                        }
+                        disabled={formStatus == 'submitting' || firstName.length == 0}
                         htmlType="submit"
                     >
                         Submit
                     </Button>
 
                     {formStatus == 'success' && (
-                        <p style={{ color: 'green' }}>
-                            {' '}
-                            Full Name is {fullName}{' '}
-                        </p>
+                        <p style={{ color: 'green' }}> Full Name is {fullName} </p>
                     )}
-                    {formStatus == 'error' && (
-                        <p style={{ color: 'red' }}> Error! </p>
-                    )}
+                    {formStatus == 'error' && <p style={{ color: 'red' }}> Error! </p>}
                 </Form>
             </div>
         </div>

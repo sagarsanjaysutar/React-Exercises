@@ -5,10 +5,9 @@ import React, { FC, ReactNode, useState } from 'react';
 
 import { Layout, Tabs, TabsProps } from 'antd';
 
-import Styles from './home.module.css';
-
 import MenuBar from '@/components/menuBar/menuBar';
 import ContentContainer from '@/components/content/content';
+import validators from '@/sections/maps/coordinateValidators';
 
 const { Sider, Header, Footer, Content } = Layout;
 
@@ -24,10 +23,7 @@ const Home: FC = () => {
     return (
         <Layout>
             <Sider width={menuBarWidth}>
-                <MenuBar
-                    width={menuBarWidth}
-                    onSelect={(content) => setContent(content)}
-                />
+                <MenuBar width={menuBarWidth} onSelect={(content) => setContent(content)} />
             </Sider>
             <Content style={{ height: '100vh' }}>
                 <ContentContainer content={content} />

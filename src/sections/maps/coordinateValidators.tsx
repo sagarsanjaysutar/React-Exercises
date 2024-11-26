@@ -168,10 +168,9 @@ function parseCoordinateDirection(coordinate: string) {
     const isDirection = direction.length == 1 && direction.match(/[newsNEWS]/) != null;
 
     if (isDirection) {
-        
         // If direction letter is found, the coordinate shouldn't have a negative symbol.
-        if(coordinate[0] == "-"){
-            return "";
+        if (coordinate[0] == '-') {
+            return '';
         }
 
         // If direction is South or West, prepend negative symbol to the coordinate.
