@@ -5,7 +5,11 @@ type ContentContainerProp = {
 };
 
 const ContentContainer: FC<ContentContainerProp> = ({ content }) => {
-    return <div className="bg-amber-200 flex justify-center items-center">{content}</div>;
+    return (
+        <div className="bg-gray-950 flex justify-center items-center" style={{ height: 'inherit' }}>
+            {content}
+        </div>
+    );
 };
 
 export default ContentContainer;

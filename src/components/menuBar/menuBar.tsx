@@ -3,6 +3,7 @@ import Form from '@/sections/quiz/quiz';
 import CollapseBox from '@/sections/collapseBox/collapseBox';
 import Maps from '@/sections/maps/maps';
 import { Drawer, List, Typography } from 'antd';
+import CounterContainer from '@/sections/counters/counters';
 
 type MenuBarProp = {
     width: string;
@@ -53,6 +54,14 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
                 setActiveMenuItemKey(key);
             },
         },
+        {
+            key: '4',
+            label: 'Counter',
+            onClick: (key) => {
+                onSelect(<CounterContainer />);
+                setActiveMenuItemKey(key);
+            },
+        },
     ];
 
     // A flag that keeps track of the active MenuItem.
@@ -86,7 +95,7 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
                     },
                     // Menu body
                     body: {
-                        backgroundColor: '#d3d3d3',
+                        backgroundColor: '#111827 ',
                         padding: '0px',
                     },
                     header: { display: 'none' },
@@ -100,14 +109,14 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
                                 menuItem.onClick(menuItem.key);
                             }}
                             key={menuItem.key}
-                            className={`text-blue-950 ${
+                            className={` ${
                                 menuItem.key == activeMenuItemKey // Active Item is of different color.
-                                    ? 'bg-yellow-200'
-                                    : 'bg-yellow-500'
+                                    ? 'bg-gray-600'
+                                    : 'bg-gray-800'
                             }`}
                         >
                             <span
-                                className={`px-3 cursor-default ${
+                                className={`px-3 cursor-default text-white ${
                                     menuItem.key == '0' ? 'font-bold' : '' // Home Item is bold
                                 }`}
                             >
