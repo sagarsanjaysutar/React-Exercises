@@ -4,6 +4,7 @@ import CollapseBox from '@/sections/collapseBox/collapseBox';
 import Maps from '@/sections/maps/maps';
 import { Drawer, List, Typography } from 'antd';
 import CounterContainer from '@/sections/counters/counters';
+import TaskContainer from '@/sections/tasks/tasks';
 
 type MenuBarProp = {
     width: string;
@@ -59,6 +60,14 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
             label: 'Counter',
             onClick: (key) => {
                 onSelect(<CounterContainer />);
+                setActiveMenuItemKey(key);
+            },
+        },
+        {
+            key: '5',
+            label: 'Task List',
+            onClick: (key) => {
+                onSelect(<TaskContainer />);
                 setActiveMenuItemKey(key);
             },
         },
