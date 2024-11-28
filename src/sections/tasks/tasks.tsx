@@ -1,16 +1,16 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useReducer, useRef, useState } from 'react';
 import { DeleteOutlined, EditOutlined, PlusOutlined, SaveOutlined } from '@ant-design/icons';
 import { Avatar, Button, Input, InputRef, List, Space } from 'antd';
+import { Task } from './taskTypes';
+import TaskReducer from './taskReducer';
 
-type Task = {
-    key: number;
-    title: string;
-};
-
+/**
+ * @brief UI Description: TaskList component containing TaskItem component.
+ */
 type TaskProp = {
     task: Task;
     onTaskEdit?: (editedTask: Task) => void;
-    onTaskDelete: (deletedTaskKey: number) => void;
+    onTaskDelete: (deletedTask: Task) => void;
 };
 
 const TaskItem: FC<TaskProp> = ({ task, onTaskEdit, onTaskDelete }) => {
@@ -37,7 +37,7 @@ const TaskItem: FC<TaskProp> = ({ task, onTaskEdit, onTaskDelete }) => {
                     type="primary"
                     danger
                     icon={<DeleteOutlined />}
-                    onClick={() => onTaskDelete(task.key)}
+                    onClick={() => onTaskDelete(task)}
                 />,
             ]}
         >
@@ -64,6 +64,7 @@ const TaskItem: FC<TaskProp> = ({ task, onTaskEdit, onTaskDelete }) => {
     );
 };
 
+// These default values are placed outside the component as we do not want them to re-render.
 const initialTask: Task = { key: -1, title: '' };
 
 const initialTasks: Task[] = [
@@ -73,23 +74,34 @@ const initialTasks: Task[] = [
 ];
 
 const TaskList: FC = () => {
-    const [tasks, setTasks] = useState<Task[]>(initialTasks);
+    // #00. A state for task list. These corresponding "task"/state handlers would grow as component gets complex.
+    // This is why it's best to move state handler into a reducer component.
+    
+    // const [tasks, setTasks] = useState<Task[]>(initialTasks);
+
+    // const addTask = (addedTask: Task) => {
+    //     setTasks([addedTask, ...tasks]);
+    // };
+
+    // const editTask = (editedTask: Task) =>
+    //     setTasks(
+    //         tasks.map((task) => {
+    //             if (task.key == editedTask.key) return editedTask;
+    //             return task;
+    //         })
+    //     );
+
+    // const deleteTask = (deletedTaskKey: number) =>
+    //     setTasks(tasks.filter((task) => task.key !== deletedTaskKey));
+
+    // #01. Using reducer functions. The code got cleaner.
+    const [tasks, dispatch] = useReducer(TaskReducer, initialTasks);
+    const addTask = (addedTask: Task) => dispatch({ type: 'added', payload: addedTask });
+    const editTask = (editedTask: Task) => dispatch({ type: 'edited', payload: editedTask });
+    const deleteTask = (deletedTask: Task) => dispatch({ type: 'deleted', payload: deletedTask });
+
+    // A state for new task.
     const [newTask, setNewTask] = useState<Task>(initialTask);
-
-    const onTaskAdded = (addedTask: Task) => {
-        setTasks([addedTask, ...tasks]);
-    };
-
-    const onTaskEdit = (editedTask: Task) =>
-        setTasks(
-            tasks.map((task) => {
-                if (task.key == editedTask.key) return editedTask;
-                return task;
-            })
-        );
-
-    const onTaskDelete = (deletedTaskKey: number) =>
-        setTasks(tasks.filter((task) => task.key !== deletedTaskKey));
 
     return (
         <div className="bg-slate-500" style={{ width: '50vw', height: 'auto' }}>
@@ -102,7 +114,7 @@ const TaskList: FC = () => {
                             value={newTask.title}
                             onPressEnter={() => {
                                 if (newTask.title.length !== 0) {
-                                    onTaskAdded?.(newTask);
+                                    addTask?.(newTask);
                                     setNewTask(initialTask);
                                 }
                             }}
@@ -116,7 +128,7 @@ const TaskList: FC = () => {
                             icon={<PlusOutlined />}
                             onClick={() => {
                                 if (newTask.title.length !== 0) {
-                                    onTaskAdded?.(newTask);
+                                    addTask?.(newTask);
                                     setNewTask(initialTask);
                                 }
                             }}
@@ -129,7 +141,7 @@ const TaskList: FC = () => {
                 bordered
                 dataSource={tasks}
                 renderItem={(item) => (
-                    <TaskItem task={item} onTaskEdit={onTaskEdit} onTaskDelete={onTaskDelete} />
+                    <TaskItem task={item} onTaskEdit={editTask} onTaskDelete={deleteTask} />
                 )}
             />
         </div>
