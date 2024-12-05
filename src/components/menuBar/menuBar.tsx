@@ -5,6 +5,7 @@ import Maps from '@/sections/maps/maps';
 import { Drawer, List, Typography } from 'antd';
 import CounterContainer from '@/sections/counters/counters';
 import TaskContainer from '@/sections/tasks/tasks';
+import HeaderContainer from '@/sections/headerContainer/headerContainer';
 
 type MenuBarProp = {
     width: string;
@@ -68,6 +69,14 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
             label: 'Task List',
             onClick: (key) => {
                 onSelect(<TaskContainer />);
+                setActiveMenuItemKey(key);
+            },
+        },
+        {
+            key: '6',
+            label: 'Headers',
+            onClick: (key) => {
+                onSelect(<HeaderContainer />);
                 setActiveMenuItemKey(key);
             },
         },

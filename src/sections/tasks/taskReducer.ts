@@ -10,7 +10,6 @@
  *      1. Separation of concerns. Event Handlers in the component dispatch actions & reducers mutate the state.
  *      2. Readability.
  */
-import { TaskAbortError } from '@reduxjs/toolkit';
 import { Task, TaskAction } from './taskTypes';
 
 /**
