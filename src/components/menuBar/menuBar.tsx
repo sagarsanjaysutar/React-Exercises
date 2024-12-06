@@ -1,19 +1,20 @@
-import React, { FC, ReactNode, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import { Drawer, List } from 'antd';
+
 import Form from '@/sections/quiz/quiz';
 import CollapseBox from '@/sections/collapseBox/collapseBox';
 import Maps from '@/sections/maps/maps';
-import { Drawer, List, Typography } from 'antd';
 import CounterContainer from '@/sections/counters/counters';
-import TaskContainer from '@/sections/tasks/tasks';
+import TaskContainer from '@/sections/tasks/taskContainer';
 import HeaderContainer from '@/sections/headerContainer/headerContainer';
-
-type MenuBarProp = {
-    width: string;
-    onSelect: (content: ReactNode) => void;
-};
 
 const HomeContent: FC = () => {
     return <h1>Default Home Content</h1>;
+};
+
+type MenuBarProp = {
+    width: string;
+    onSelect: (component: React.ReactNode) => void;
 };
 
 const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
@@ -21,64 +22,44 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
     type MenuItem = {
         key: string;
         label: string;
-        onClick: (key: string) => void;
+        component: React.ReactNode;
     };
+
     const menuItems: MenuItem[] = [
         {
             key: '0',
             label: 'Home',
-            onClick: (key) => {
-                onSelect(<HomeContent />);
-                setActiveMenuItemKey(key);
-            },
+            component: <HomeContent />,
         },
         {
             key: '1',
             label: 'Collapse Box',
-            onClick: (key) => {
-                onSelect(<CollapseBox />);
-                setActiveMenuItemKey(key);
-            },
+            component: <CollapseBox />,
         },
         {
             key: '2',
             label: 'Quiz',
-            onClick: (key) => {
-                onSelect(<Form />);
-                setActiveMenuItemKey(key);
-            },
+            component: <Form />,
         },
         {
             key: '3',
             label: 'Maps',
-            onClick: (key) => {
-                onSelect(<Maps />);
-                setActiveMenuItemKey(key);
-            },
+            component: <Maps />,
         },
         {
             key: '4',
             label: 'Counter',
-            onClick: (key) => {
-                onSelect(<CounterContainer />);
-                setActiveMenuItemKey(key);
-            },
+            component: <CounterContainer />,
         },
         {
             key: '5',
             label: 'Task List',
-            onClick: (key) => {
-                onSelect(<TaskContainer />);
-                setActiveMenuItemKey(key);
-            },
+            component: <TaskContainer />,
         },
         {
             key: '6',
             label: 'Headers',
-            onClick: (key) => {
-                onSelect(<HeaderContainer />);
-                setActiveMenuItemKey(key);
-            },
+            component: <HeaderContainer />,
         },
     ];
 
@@ -124,7 +105,8 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
                     renderItem={(menuItem) => (
                         <List.Item
                             onClick={() => {
-                                menuItem.onClick(menuItem.key);
+                                onSelect(menuItem.component);
+                                setActiveMenuItemKey(menuItem.key);
                             }}
                             key={menuItem.key}
                             className={` ${
