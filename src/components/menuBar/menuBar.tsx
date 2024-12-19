@@ -7,6 +7,7 @@ import Maps from '@/sections/maps/maps';
 import CounterContainer from '@/sections/counters/counters';
 import TaskContainer from '@/sections/tasks/taskContainer';
 import HeaderContainer from '@/sections/headerContainer/headerContainer';
+import VideoContainer from '@/sections/video/videoContainer';
 
 const HomeContent: FC = () => {
     return <h1>Default Home Content</h1>;
@@ -60,6 +61,11 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
             key: '6',
             label: 'Headers',
             component: <HeaderContainer />,
+        },
+        {
+            key: '7',
+            label: 'Video Player',
+            component: <VideoContainer />,
         },
     ];
 
