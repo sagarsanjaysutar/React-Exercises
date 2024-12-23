@@ -6,31 +6,27 @@ type HeaderProp = {
     level?: number;
 };
 
-function getSizedHeading(level: number) {
+function getFormattedStyle(level: number) {
     switch (level) {
         case 1:
-            return 'text-5xl';
+            return 'text-5xl text-slate-200';
         case 2:
-            return 'text-4xl';
+            return 'text-4xl text-slate-300';
         case 3:
-            return 'text-3xl';
+            return 'text-3xl text-slate-400';
         case 4:
-            return 'text-2xl';
+            return 'text-2xl text-slate-500';
         case 5:
-            return 'text-1xl';
+            return 'text-1xl text-slate-600';
         default:
-            return 'text-xl';
+            return 'text-xl text-slate-50';
     }
 }
 
 const Header: FC<HeaderProp> = ({ children, level: levelProp }) => {
     // The level is dynamically derived from the closest Context Provider in the component tree.
     const level = levelProp ? levelProp : useContext(LevelContext);
-    return (
-        <h1 className={`${getSizedHeading(level)} text-slate-400 pb-5 pt-10`}>
-            {children}
-        </h1>
-    );
+    return <h1 className={`${getFormattedStyle(level)} pb-3`}>{children}</h1>;
 };
 
 export default Header;

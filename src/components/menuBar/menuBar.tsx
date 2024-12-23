@@ -9,6 +9,7 @@ import TaskContainer from '@/sections/Managing-State/tasks/taskContainer';
 import HeaderContainer from '@/sections/Managing-State/nestedHeader/nestedHeaderContainer';
 import VideoContainer from '@/sections/Escape-Hatches/video/videoContainer';
 import Home from '@/sections/Home/home';
+import EffectsContainer from '@/sections/Escape-Hatches/Misusing-Effects';
 
 type MenuBarProp = {
     width: string;
@@ -73,11 +74,16 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
         },
         {
             key: '9',
+            label: 'You might not need Effects',
+            component: <EffectsContainer />,
+        },
+        {
+            key: '10',
             label: 'Miscellaneous',
             header: true,
         },
         {
-            key: '10',
+            key: '11',
             label: 'Maps',
             component: <Maps />,
         },
