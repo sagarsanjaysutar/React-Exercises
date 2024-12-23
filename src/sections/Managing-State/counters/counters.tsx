@@ -6,6 +6,8 @@
  */
 import { Button, Checkbox } from 'antd';
 import React, { FC, useState } from 'react';
+import Header from '@/components/header/header';
+import { PlusCircleFilled, PlusOutlined } from '@ant-design/icons';
 
 type CounterProp = {
     isFancy?: boolean;
@@ -16,9 +18,10 @@ const Counter: FC<CounterProp> = ({ isFancy }) => {
     const [counter, setCounter] = useState(0);
     return (
         <div
-            className={`${
-                isFancy ? 'bg-slate-300' : ''
-            } text-gray-800 rounded mx-2 my-2 flex justify-center flex-col items-center border-2 border-gray-100`}
+            className={`
+                ${isFancy ? 'bg-purple-300 text-purple-950' : ''}
+                bg-slate-800 text-slate-200 rounded mr-5 my-5 flex flex-col justify-center items-center
+            `}
             style={{ width: '10rem', height: '8rem' }}
         >
             <h1 className=""> Counter </h1>
@@ -27,9 +30,11 @@ const Counter: FC<CounterProp> = ({ isFancy }) => {
                 onClick={() => {
                     setCounter(counter + 1);
                 }}
-            >
-                +
-            </Button>
+                icon={<PlusCircleFilled />}
+                type="text"
+                size="large"
+                className="text-slate-200 "
+            />
         </div>
     );
 };
@@ -39,17 +44,24 @@ const CounterContainer: FC = () => {
     const [fancyCounter, setFancyCounter] = useState(false);
 
     return (
-        <div className="bg-slate-600 flex flex-col px-2 py-2">
+        <div className="">
+            <Header>Preserving and Resetting State</Header>
             <>
                 {/* #00. Here the state of the Counter doesn't get preserved when component gets destroyed.*/}
-                <div className=" flex flex-row">
+                <div className="flex flex-row">
                     <Counter />
                     {!checked ? <Counter /> : <></>}
                 </div>
-                <Checkbox checked={checked} onChange={() => setChecked(!checked)}>
+                <Checkbox
+                    checked={checked}
+                    onChange={() => setChecked(!checked)}
+                    className="text-base text-slate-200"
+                >
                     Hide 2nd Counter
                 </Checkbox>
             </>
+            <div className="border-t border-slate-500 my-4"></div>
+
             <>
                 {/* #01. Here the state of the Counter gets preserved despite the component being destroyed
                  * because both components are rendered at the same "position", so from React’s perspective,
@@ -57,10 +69,15 @@ const CounterContainer: FC = () => {
                 <div className=" flex flex-row">
                     {fancyCounter ? <Counter isFancy={true} /> : <Counter isFancy={false} />}
                 </div>
-                <Checkbox checked={fancyCounter} onChange={() => setFancyCounter(!fancyCounter)}>
+                <Checkbox
+                    checked={fancyCounter}
+                    onChange={() => setFancyCounter(!fancyCounter)}
+                    className="text-base text-slate-200"
+                >
                     Fancy counter
                 </Checkbox>
             </>
+            <div className="border-t border-slate-500 my-4"></div>
             <>
                 {/* #02. Here the state of the Counter gets preserved by default due to the components being at
                  * the same position, but the state can get reset if we add a "key" to make components unique.*/}
@@ -71,10 +88,15 @@ const CounterContainer: FC = () => {
                         <Counter isFancy={false} key="1" />
                     )}
                 </div>
-                <Checkbox checked={fancyCounter} onChange={() => setFancyCounter(!fancyCounter)}>
+                <Checkbox
+                    checked={fancyCounter}
+                    onChange={() => setFancyCounter(!fancyCounter)}
+                    className="text-base text-slate-200"
+                >
                     Fancy counter
                 </Checkbox>
             </>
+            <div className="border-t border-slate-500 my-4"></div>
         </div>
     );
 };

@@ -1,17 +1,14 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Drawer, List } from 'antd';
 
-import Form from '@/sections/quiz/quiz';
-import CollapseBox from '@/sections/collapseBox/collapseBox';
-import Maps from '@/sections/maps/maps';
-import CounterContainer from '@/sections/counters/counters';
-import TaskContainer from '@/sections/tasks/taskContainer';
-import HeaderContainer from '@/sections/headerContainer/headerContainer';
-import VideoContainer from '@/sections/video/videoContainer';
-
-const HomeContent: FC = () => {
-    return <h1>Default Home Content</h1>;
-};
+import Form from '@/sections/Managing-State/quiz/quiz';
+import CollapseBox from '@/sections/Managing-State/collapseBox/collapseBox';
+import Maps from '@/sections/Miscellaneous/maps/maps';
+import CounterContainer from '@/sections/Managing-State/counters/counters';
+import TaskContainer from '@/sections/Managing-State/tasks/taskContainer';
+import HeaderContainer from '@/sections/Managing-State/nestedHeader/nestedHeaderContainer';
+import VideoContainer from '@/sections/Escape-Hatches/video/videoContainer';
+import Home from '@/sections/Home/home';
 
 type MenuBarProp = {
     width: string;
@@ -23,49 +20,66 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
     type MenuItem = {
         key: string;
         label: string;
-        component: React.ReactNode;
+        component?: React.ReactNode;
+        header?: boolean;
     };
 
     const menuItems: MenuItem[] = [
         {
             key: '0',
             label: 'Home',
-            component: <HomeContent />,
+            component: <Home />,
         },
         {
             key: '1',
-            label: 'Collapse Box',
-            component: <CollapseBox />,
+            label: 'Managing State',
+            header: true,
         },
         {
             key: '2',
-            label: 'Quiz',
+            label: 'Reacting to Input with State & Choosing the State Structure.',
             component: <Form />,
         },
         {
             key: '3',
-            label: 'Maps',
-            component: <Maps />,
+            label: 'Sharing State Between Components',
+            component: <CollapseBox />,
         },
         {
             key: '4',
-            label: 'Counter',
+            label: 'Preserving and Resetting State',
             component: <CounterContainer />,
         },
+
         {
             key: '5',
-            label: 'Task List',
+            label: 'Extracting State Logic into a Reducer & Scaling Up with Reducer and Context',
             component: <TaskContainer />,
         },
         {
             key: '6',
-            label: 'Headers',
+            label: 'Passing Data Deeply with Context',
             component: <HeaderContainer />,
         },
         {
             key: '7',
-            label: 'Video Player',
+            label: 'Escape Hatches',
+            header: true,
+        },
+        {
+            key: '8',
+            label: 'Synchronizing with Effects',
             component: <VideoContainer />,
+        },
+        {
+            key: '9',
+            label: 'Miscellaneous',
+            header: true,
+        },
+        {
+            key: '10',
+            label: 'Maps',
+            component: <Maps />,
         },
     ];
 
@@ -111,20 +125,28 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
                     renderItem={(menuItem) => (
                         <List.Item
                             onClick={() => {
-                                onSelect(menuItem.component);
-                                setActiveMenuItemKey(menuItem.key);
+                                if (!menuItem.header) {
+                                    onSelect(menuItem.component);
+                                    setActiveMenuItemKey(menuItem.key);
+                                }
                             }}
                             key={menuItem.key}
-                            className={` ${
-                                menuItem.key == activeMenuItemKey // Active Item is of different color.
-                                    ? 'bg-gray-600'
-                                    : 'bg-gray-800'
-                            }`}
+                            className={` 
+                                ${
+                                    menuItem.key == activeMenuItemKey // Active Item is of different color.
+                                        ? 'bg-gray-800 rounded-r-xl'
+                                        : ''
+                                }
+                            `}
                         >
                             <span
-                                className={`px-3 cursor-default text-white ${
-                                    menuItem.key == '0' ? 'font-bold' : '' // Home Item is bold
-                                }`}
+                                className={`px-3 cursor-default text-white 
+                                    ${
+                                        menuItem.header
+                                            ? 'font-bold  text-slate-400 text-base'
+                                            : 'font-normal text-slate-100 pl-5'
+                                    }
+                                `}
                             >
                                 {menuItem.label}
                             </span>

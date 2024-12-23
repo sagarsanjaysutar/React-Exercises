@@ -6,6 +6,7 @@
 import React, { FC } from 'react';
 import { TaskProvider } from './taskProvider';
 import TaskList from './taskList';
+import Header from '@/components/header/header';
 
 /**
  * @brief TaskList renders TaskItem for each Task. There is also a AddTask component.
@@ -13,9 +14,15 @@ import TaskList from './taskList';
  */
 const TaskContainer: FC = () => {
     return (
-        <TaskProvider>
-            <TaskList />
-        </TaskProvider>
+        <div>
+            <Header>
+                Extracting State Logic into a Reducer & <br />
+                Scaling Up with Reducer and Context
+            </Header>
+            <TaskProvider>
+                <TaskList />
+            </TaskProvider>
+        </div>
     );
 };
 

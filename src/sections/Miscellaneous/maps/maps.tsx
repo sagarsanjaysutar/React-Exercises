@@ -2,6 +2,7 @@ import { Button } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import Map, { ViewState } from 'react-map-gl';
+import Header from '@/components/header/header';
 
 const Maps: FC = () => {
     // Default value for the initial view state.
@@ -30,9 +31,14 @@ const Maps: FC = () => {
     };
 
     return (
-        <div className="bg-stone-50">
-            <Button onClick={handleSubmit}> Click </Button>
-            <ErrorBoundary fallback={<div>Something went wrong</div>}>
+        <div className="">
+            <Header>Mapbox-GL with Error Boundary</Header>
+            <Button onClick={handleSubmit} className="my-5" type="primary" danger>
+                Search for an Invalid Coordinate
+            </Button>
+            <ErrorBoundary
+                fallback={<p className="text-lg text-slate-200">Something went wrong</p>}
+            >
                 <Map
                     mapboxAccessToken="pk.eyJ1IjoiYWphd25lIiwiYSI6ImNsZHl3bGYzMDBuejMzbnByaXp1dDhiMmoifQ.x2E-l7JcqBGQBzgwCLlHAA"
                     {...viewState}

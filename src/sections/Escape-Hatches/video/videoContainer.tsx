@@ -3,6 +3,7 @@
  * @ref https://react.dev/learn/synchronizing-with-effects
  */
 import React, { FC, useEffect, useRef, useState } from 'react';
+import Header from '@/components/header/header';
 
 type VideoPlayerProp = {
     isPlaying: boolean;
@@ -55,6 +56,7 @@ const VideoContainer: FC = () => {
                 if (e.key === 'p') setIsPlaying(!isPlaying);
             }}
         >
+            <Header>Synchronizing with Effects</Header>
             <VideoPlayer isPlaying={isPlaying} />{' '}
         </div>
     );

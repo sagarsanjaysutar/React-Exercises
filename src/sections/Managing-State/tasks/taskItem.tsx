@@ -26,7 +26,7 @@ const TaskItem: FC<TaskProp> = ({ task }) => {
                                 type: 'edited',
                                 payload: {
                                     ...task,
-                                    title: editedTitle != task.title ? editedTitle : task.title,
+                                    title: editedTitle != '' ? editedTitle : task.title,
                                 },
                             });
                             setIsEditing(false);
@@ -59,12 +59,12 @@ const TaskItem: FC<TaskProp> = ({ task }) => {
                             }}
                         />
                     ) : (
-                        <p>
+                        <p className="text-lg text-slate-200">
                             {task.key} | {task.title}
                         </p>
                     )
                 }
-                description={<p>Random description</p>}
+                description={<p className="text-base text-slate-500">Random description</p>}
             />
         </List.Item>
     );
