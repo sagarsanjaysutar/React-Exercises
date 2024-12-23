@@ -17,7 +17,6 @@ const { Meta } = Card;
  * Explanation: This is because next/previous ProfileCards are rendered at the same place in the UI tree.
  *              From React’s perspective, it’s the same Card which is why it doesn't reset the input box
  *              or any States that the card might hold.
- * Solution: Give key to the ProfileCard to make it unique in React's perspective.
  */
 
 type ProfileCardProp = {
@@ -26,10 +25,13 @@ type ProfileCardProp = {
 const ProfileCard: FC<ProfileCardProp> = ({ profile }) => {
     const [comment, setComment] = useState('');
 
-    useEffect(() => {
-        console.log('Use effect called.');
-        setComment('');
-    }, [profile]);
+    // # Sol 00: Using effect, reset the comments when profile changes.
+    //          This is not-scalable as similar logic would be needed,
+    //          if there are more children components that needs to reset.
+    // useEffect(() => {
+    //     console.log('Use effect called.');
+    //     setComment('');
+    // }, [profile]);
 
     return (
         <Card
@@ -43,7 +45,12 @@ const ProfileCard: FC<ProfileCardProp> = ({ profile }) => {
             }
         >
             <Meta title={profile.first + ' ' + profile.last} description={profile.address} />
-            <Input className="mt-3" placeholder="Leave an anonymous message..." value={comment} />
+            <Input
+                className="mt-3"
+                placeholder="Leave an anonymous message..."
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+            />
         </Card>
     );
 };
@@ -55,7 +62,11 @@ const ProfileContainer: FC = () => {
         <div>
             <Header level={4}>Resetting all state when a prop changes</Header>
             <div className="flex flex-col items-center space-y-4 w-fit">
-                <ProfileCard profile={profile} key={profileIdx} />
+                <ProfileCard
+                    // # Sol 01: Give key to the ProfileCard to make it unique in React's perspective.
+                    key={profile?.key}
+                    profile={profile}
+                />
                 <Radio.Group>
                     <Radio.Button
                         value="large"
