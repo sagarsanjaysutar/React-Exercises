@@ -12,7 +12,6 @@ import { Button, Card, Divider, Form, Input, notification, Radio, Rate, Row, Spa
 import Icon, { ShoppingCartOutlined } from '@ant-design/icons';
 import { IconType } from 'antd/es/notification/interface';
 import { Product } from './type';
-import { extractColors } from 'extract-colors';
 import ShuffleIcon from '@/assests/icons/shuffle-svgrepo-com.svg';
 type ProductCardProp = {
     product: Product;
