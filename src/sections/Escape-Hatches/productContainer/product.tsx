@@ -44,16 +44,38 @@ const ProductCard: FC<ProductCardProp> = ({ product, onRandomProduct }) => {
      *              This isn't recommended as changing a state based on other state/prop inside an effect,
      *              causes unnecessary rerenders.
      * # Soln 01: Using effects to set the comments under certain conditions. Same rationale of re-rendering occurs.
-     * useEffect(() => {
-     *     console.log('Use effect called.');
-     *     if (product.id == '2') {
-     *         setComment('Francesco found.');
-     *     }
-     * }, [product]);
-     * # Soln 01: Eliminate the use of Effects by calculating the value of comment during rendering.
+     */
+    // useEffect(() => {
+    //     console.log('Use effect called.');
+    //     if (product.id == 2) {
+    //         setComment('Francesco found.');
+    //     }
+    // }, [product]);
+    /** # Soln 01: Eliminate the use of Effects by calculating the value of comment during rendering. 
+     * This can get tricky sometimes. Read further.
      */
     const [comment, setComment] = useState('');
     const specialComment = product.id == 2 ? 'Francesco found.' : '';
+    
+    // # Note: The following code is to extract dominant colors from the product image for UI purposes.
+    // In this case, Approach 1 follows Soln1 which seems fine but it isn't. The extractColor is an async/external
+    // function thus it needs to follows Approach 2.
+    // const [cardColor, setCardColor] = useState('#ffffff');
+    // Approach 1: if (product != productCopy) {
+    //     extractColors(productCopy.image)
+    //         .then((res) => {
+    //             setCardColor(`${res[0].hex}`);
+    //         })
+    //         .catch(console.error);
+    // }
+
+    // Approach 2: useEffect(() => {
+    //     extractColors(productCopy.image)
+    //         .then((res) => {
+    //             setCardColor(`${res[0].hex}`);
+    //         })
+    //         .catch(console.error);
+    // }, [product.image]);
 
     // A copy is made to mutate the product (in this case, to change it's addToCart prop)
     const [productCopy, setProductCopy] = useState(product);
@@ -98,15 +120,6 @@ const ProductCard: FC<ProductCardProp> = ({ product, onRandomProduct }) => {
 
     function buyNow() {
         addToCart();
-    }
-
-    const [cardColor, setCardColor] = useState('#ffffff');
-    if (product != productCopy) {
-        extractColors(productCopy.image)
-            .then((res) => {
-                setCardColor(`${res[0].hex}`);
-            })
-            .catch(console.error);
     }
 
     return (
