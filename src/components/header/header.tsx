@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import LevelContext from '../../sections/Managing-State/nestedHeader/levelContext';
+import LevelContext from '../../sections/managing-state/passing-data-deeply-with-context/NestedHeader/LevelContext';
 
 type HeaderProp = {
     children: React.ReactNode;

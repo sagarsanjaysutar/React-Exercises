@@ -1,15 +1,16 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Drawer, List } from 'antd';
 
-import Form from '@/sections/Managing-State/quiz/quiz';
-import CollapseBox from '@/sections/Managing-State/collapseBox/collapseBox';
+import Form from '@/sections/managing-state/reacting-to-input-with-state/Quiz';
+import CollapseBox from '@/sections/managing-state/sharing-state-between-components/CollapseBox';
 import Maps from '@/sections/Miscellaneous/maps/maps';
-import CounterContainer from '@/sections/Managing-State/counters/counters';
-import TaskContainer from '@/sections/Managing-State/tasks/taskContainer';
-import HeaderContainer from '@/sections/Managing-State/nestedHeader/nestedHeaderContainer';
-import VideoContainer from '@/sections/Escape-Hatches/video/videoContainer';
+import CounterContainer from '@/sections/managing-state/preserving-and-resetting-state/Counters';
+import TaskContainer from '@/sections/managing-state/extracting-state-logic-into-a-reducer/Tasks';
+import HeaderContainer from '@/sections/managing-state/passing-data-deeply-with-context/NestedHeader';
+import VideoContainer from '@/sections/escape-hatches/synchronizing-with-effects/VideoContainer';
 import Home from '@/sections/Home/home';
-import ProductContainer from '@/sections/Escape-Hatches/productContainer/productContainer';
+import ProductContainer from '@/sections/escape-hatches/you-might-not-need-an-effect/ProductContainer';
+import GuestContainer from '@/sections/describing-ui/GuestCounter';
 
 type MenuBarProp = {
     width: string;
@@ -30,6 +31,16 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
             key: 0,
             label: 'Home',
             component: <Home />,
+        },
+        {
+            key: 1,
+            label: 'Describing UI',
+            header: true,
+        },
+        {
+            key: 2,
+            label: 'Guest Counter',
+            component: <GuestContainer />,
         },
         {
             key: 1,

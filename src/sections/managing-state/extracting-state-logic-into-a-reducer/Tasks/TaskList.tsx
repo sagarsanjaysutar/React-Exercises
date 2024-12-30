@@ -1,8 +1,8 @@
 import { List } from 'antd';
-import AddTask from './addTask';
-import { useTasksContextProvider } from './taskProvider';
+import AddTask from './AddTask';
+import { useTasksContextProvider } from './TaskProvider';
 import React, { FC } from 'react';
-import TaskItem from './taskItem';
+import TaskItem from './TaskItem';
 
 const TaskList: FC = () => {
     const { tasks } = useTasksContextProvider();

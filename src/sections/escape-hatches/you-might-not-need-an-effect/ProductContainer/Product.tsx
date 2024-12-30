@@ -7,8 +7,8 @@
  *      3. Initializing the application: Ehhh.
  *      4. Subscribing to an external store: It looks like Redux covers this. I'll prefer to use redux.
  */
-import React, { FC, useEffect, useState } from 'react';
-import { Button, Card, Divider, Form, Input, notification, Radio, Rate, Row, Space } from 'antd';
+import React, { FC, useState } from 'react';
+import { Button, Card, Divider, Input, notification, Rate, Row } from 'antd';
 import Icon, { ShoppingCartOutlined } from '@ant-design/icons';
 import { IconType } from 'antd/es/notification/interface';
 import { Product } from './type';
@@ -51,12 +51,12 @@ const ProductCard: FC<ProductCardProp> = ({ product, onRandomProduct }) => {
     //         setComment('Francesco found.');
     //     }
     // }, [product]);
-    /** # Soln 01: Eliminate the use of Effects by calculating the value of comment during rendering. 
+    /** # Soln 01: Eliminate the use of Effects by calculating the value of comment during rendering.
      * This can get tricky sometimes. Read further.
      */
     const [comment, setComment] = useState('');
     const specialComment = product.id == 2 ? 'Francesco found.' : '';
-    
+
     // # Note: The following code is to extract dominant colors from the product image for UI purposes.
     // In this case, Approach 1 follows Soln1 which seems fine but it isn't. The extractColor is an async/external
     // function thus it needs to follows Approach 2.

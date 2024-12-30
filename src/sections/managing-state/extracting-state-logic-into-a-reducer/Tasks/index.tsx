@@ -4,8 +4,8 @@
  * @ref https://react.dev/learn/scaling-up-with-reducer-and-context
  */
 import React, { FC } from 'react';
-import { TaskProvider } from './taskProvider';
-import TaskList from './taskList';
+import { TaskProvider } from './TaskProvider';
+import TaskList from './TaskList';
 import Header from '@/components/header/header';
 
 /**

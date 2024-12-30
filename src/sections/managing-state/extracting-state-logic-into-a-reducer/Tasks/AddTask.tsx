@@ -1,6 +1,6 @@
 import { Button, Input, Space } from 'antd';
 import React, { FC, useState } from 'react';
-import { useTasksContextProvider, Task } from './taskProvider';
+import { useTasksContextProvider, Task } from './TaskProvider';
 import { PlusOutlined } from '@ant-design/icons';
 
 const AddTask: FC = () => {

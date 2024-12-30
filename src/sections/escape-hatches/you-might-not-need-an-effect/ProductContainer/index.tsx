@@ -3,10 +3,9 @@
  */
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import Header from '@/components/header/header';
-import ProductCard from './product';
-import SearchBar from './searchBar';
+import ProductCard from './Product';
+import SearchBar from './SearchBar';
 import { Product } from './type';
-import { ignore } from 'antd/es/theme/useToken';
 
 const defaultProduct: Product = {
     id: -1,

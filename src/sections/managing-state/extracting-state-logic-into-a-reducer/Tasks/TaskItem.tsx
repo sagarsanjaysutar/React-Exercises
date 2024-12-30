@@ -1,8 +1,8 @@
 import { SaveOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { InputRef, List, Button, Avatar, Input } from 'antd';
 import { FC, useRef, useState } from 'react';
-import { Task } from './taskProvider';
-import { useTasksContextProvider } from './taskProvider';
+import { Task } from './TaskProvider';
+import { useTasksContextProvider } from './TaskProvider';
 
 type TaskProp = {
     task: Task;

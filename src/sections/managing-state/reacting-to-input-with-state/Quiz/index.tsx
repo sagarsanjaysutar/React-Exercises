@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 import type { FormProps } from 'antd';
-import style from './quiz.module.css';
 import { Button, Input, Form } from 'antd';
 import Header from '@/components/header/header';
 

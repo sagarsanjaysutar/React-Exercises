@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import LevelContext from './levelContext';
+import LevelContext from './LevelContext';
 
 type SectionProp = {
     level: number;

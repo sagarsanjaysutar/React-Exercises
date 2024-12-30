@@ -4,7 +4,7 @@
  */
 import React, { FC } from 'react';
 import Header from '@/components/header/header';
-import Section from './section';
+import Section from './Section';
 
 const HeaderContainer: FC = () => {
     // #00. Here we defining & passing the level prop to each Section.
