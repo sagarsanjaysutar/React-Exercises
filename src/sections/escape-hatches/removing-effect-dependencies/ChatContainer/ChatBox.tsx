@@ -1,8 +1,9 @@
-import React, { FC, useEffect } from 'react';
-import createConnection, { EventNameType } from './chat';
-import { notification } from 'antd';
-
-const serverUrl = 'https://localhost:1234';
+/**
+ * @brief Reusing Logic with Custom Hooks
+ * @ref https://react.dev/learn/reusing-logic-with-custom-hooks
+ */
+import React, { FC } from 'react';
+import { useChatRoom } from './useChatRoom';
 
 type ChatBoxProp = {
     channelId: string;
@@ -11,7 +12,7 @@ type ChatBoxProp = {
 
 const ChatBox: FC<ChatBoxProp> = ({ channelName, channelId }) => {
     /**
-     * @todo Use of EffectEvent to update other states like message, onVisit, etc.
+     * @todo Use of EffectEvent to update other states on connection like message, onVisit, etc.
      * @ref https://react.dev/learn/removing-effect-dependencies#do-you-want-to-read-a-value-without-reacting-to-its-changes
      *
      * @todo Use of JS Object as dependency
@@ -25,29 +26,11 @@ const ChatBox: FC<ChatBoxProp> = ({ channelName, channelId }) => {
     //   });
     // const onMessage = useEffectEvent((receivedMessage) => {
     //     setMessages((msgs) => [...msgs, receivedMessage]);
-    //     if (!isMuted) {
-    //         playSound();
-    //     }
     // });
 
-    useEffect(() => {
-        // onVisit(roomId);
-        const conn = createConnection(serverUrl, channelId);
+    
+    useChatRoom(channelId);
 
-        // connection.on('message', (receivedMessage) => {
-        //     onMessage(receivedMessage);
-        // });
-
-        const eventName: EventNameType = 'connected';
-        conn.on(eventName, () => {
-            notification.open({ message: `Connected to ${channelName}` });
-        });
-        conn.connect();
-
-        return () => {
-            conn.disconnect();
-        };
-    }, [channelId]);
     return (
         <div className="flex flex-col p-5">
             <h1 className="text-xl text-slate-100">Welcome to {channelName} channel!</h1>
