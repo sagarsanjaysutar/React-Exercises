@@ -1,6 +1,6 @@
 import { SaveOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { InputRef, List, Button, Avatar, Input } from 'antd';
-import { FC, useRef, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { Task } from './TaskProvider';
 import { useTasksContextProvider } from './TaskProvider';
 
@@ -18,6 +18,7 @@ const TaskItem: FC<TaskProp> = ({ task }) => {
         <List.Item
             actions={[
                 <Button
+                    key={task.key}
                     type="primary"
                     icon={isEditing ? <SaveOutlined /> : <EditOutlined />}
                     onClick={() => {
@@ -37,6 +38,7 @@ const TaskItem: FC<TaskProp> = ({ task }) => {
                     }}
                 />,
                 <Button
+                    key={task.key}
                     type="primary"
                     danger
                     icon={<DeleteOutlined />}

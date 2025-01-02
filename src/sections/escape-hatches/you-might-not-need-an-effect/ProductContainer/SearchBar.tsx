@@ -23,9 +23,9 @@ const SearchBar: FC<SearchBarProp> = ({ onSearch, searchedList, onSearchedProduc
 
     // Returns a markup containing "text" with "subtext" being bold.
     function boldSubtext(text: string, subtext: string): React.ReactNode {
-        let subtextStartIndex = text.toLowerCase().indexOf(subtext.toLowerCase());
+        const subtextStartIndex = text.toLowerCase().indexOf(subtext.toLowerCase());
         if (subtextStartIndex >= 0) {
-            let subtextEndIndex: number = subtextStartIndex + subtext.length;
+            const subtextEndIndex: number = subtextStartIndex + subtext.length;
             return (
                 <p>
                     {text.substring(0, subtextStartIndex)}

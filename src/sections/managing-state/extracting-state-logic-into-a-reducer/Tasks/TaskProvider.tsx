@@ -1,4 +1,4 @@
-import { createContext, FC, useContext, useReducer } from 'react';
+import React, { createContext, FC, useContext, useReducer } from 'react';
 
 export type Task = {
     key: number;
@@ -108,8 +108,8 @@ export const useTasksContextProvider = (): TasksContextProviderProp => {
 };
 
 /**
- * @brief A wrapper function for ContextProvider. 
- * All the children of TaskProvider will have access to task & it's mutating functions. 
+ * @brief A wrapper function for ContextProvider.
+ * All the children of TaskProvider will have access to task & it's mutating functions.
  */
 type TaskProviderProp = {
     children: React.ReactNode;

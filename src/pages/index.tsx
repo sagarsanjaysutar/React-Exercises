@@ -12,7 +12,7 @@ import { Layout } from 'antd';
 import MenuBar from '@/components/menuBar/menuBar';
 import ContentContainer from '@/components/content/content';
 
-const { Sider, Header, Footer, Content } = Layout;
+const { Sider, Content } = Layout;
 
 const Root: FC = () => {
     // Default content is Home.
