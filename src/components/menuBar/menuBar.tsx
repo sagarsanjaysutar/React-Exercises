@@ -11,6 +11,7 @@ import VideoContainer from '@/sections/escape-hatches/synchronizing-with-effects
 import Home from '@/sections/Home/home';
 import ProductContainer from '@/sections/escape-hatches/you-might-not-need-an-effect/ProductContainer';
 import GuestContainer from '@/sections/describing-ui/GuestCounter';
+import ChatContainer from '@/sections/escape-hatches/removing-effect-dependencies/ChatContainer';
 
 type MenuBarProp = {
     width: string;
@@ -43,58 +44,63 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
             component: <GuestContainer />,
         },
         {
-            key: 1,
+            key: 3,
             label: 'Managing State',
             header: true,
         },
         {
-            key: 2,
+            key: 4,
             label: 'Reacting to Input with State & Choosing the State Structure.',
             component: <Form />,
         },
         {
-            key: 3,
+            key: 5,
             label: 'Sharing State Between Components',
             component: <CollapseBox />,
         },
         {
-            key: 4,
+            key: 6,
             label: 'Preserving and Resetting State',
             component: <CounterContainer />,
         },
 
         {
-            key: 5,
+            key: 7,
             label: 'Extracting State Logic into a Reducer & Scaling Up with Reducer and Context',
             component: <TaskContainer />,
         },
         {
-            key: 6,
+            key: 8,
             label: 'Passing Data Deeply with Context',
             component: <HeaderContainer />,
         },
         {
-            key: 7,
+            key: 9,
             label: 'Escape Hatches',
             header: true,
         },
         {
-            key: 8,
+            key: 10,
             label: 'Synchronizing with Effects',
             component: <VideoContainer />,
         },
         {
-            key: 9,
+            key: 11,
             label: 'You might not need Effects',
             component: <ProductContainer />,
         },
         {
-            key: 10,
+            key: 12,
+            label: 'Removing Effect Dependencies',
+            component: <ChatContainer />,
+        },
+        {
+            key: 13,
             label: 'Miscellaneous',
             header: true,
         },
         {
-            key: 11,
+            key: 14,
             label: 'Maps',
             component: <Maps />,
         },

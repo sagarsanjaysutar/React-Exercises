@@ -1,7 +1,9 @@
 /**
+ * @brief You Might Not Need an Effect
+ * @ref https://react.dev/learn/you-might-not-need-an-effect
  * @note The fewer raw useEffect calls you have in your components, the easier you will find to maintain your application.
  */
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Header from '@/components/header/header';
 import ProductCard from './Product';
 import SearchBar from './SearchBar';
@@ -77,6 +79,8 @@ const ProductContainer: FC = () => {
                         }));
                         setSearchedProductList(searchedProducts);
 
+                        // Note: Potential Error here: The productList is not upto date in this effect as it is not declared as dependency.
+                        // Ref: https://react.dev/learn/removing-effect-dependencies#do-you-want-to-read-a-value-without-reacting-to-its-changes
                         // Add the searched products into the main product list so that when a user clicks on
                         // the product from the searchbar-dropdown, that product is shown on ProductCard.
                         setProductList([...productList, ...searchedProducts]);
