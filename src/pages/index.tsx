@@ -11,12 +11,13 @@ import { Layout } from 'antd';
 
 import MenuBar from '@/components/menuBar/menuBar';
 import ContentContainer from '@/components/content/content';
+import WindowDemo from '@/sections/electron/Window-Demo';
 
 const { Sider, Content } = Layout;
 
 const Root: FC = () => {
     // Default content is Home.
-    const [content, setContent] = useState<ReactNode>(<Home />);
+    const [content, setContent] = useState<ReactNode>(<WindowDemo />);
     const [menuBarWidth, setMenuBarWidth] = useState('20vw');
 
     return (

@@ -12,6 +12,7 @@ import Home from '@/sections/Home/home';
 import ProductContainer from '@/sections/escape-hatches/you-might-not-need-an-effect/ProductContainer';
 import GuestContainer from '@/sections/describing-ui/GuestCounter';
 import ChatContainer from '@/sections/escape-hatches/removing-effect-dependencies/ChatContainer';
+import WindowDemo from '@/sections/electron/Window-Demo';
 
 type MenuBarProp = {
     width: string;
@@ -28,6 +29,11 @@ const MenuBar: FC<MenuBarProp> = ({ width, onSelect }) => {
     };
 
     const menuItems: MenuItem[] = [
+        {
+            key: 15,
+            label: 'New Window',
+            component: <WindowDemo />,
+        },
         {
             key: 0,
             label: 'Home',

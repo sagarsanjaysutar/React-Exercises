@@ -1,5 +1,5 @@
 module.exports = {
-    transpilePackages: ['rc-util', 'rc-pagination', 'rc-picker', '@ant-design/icons-svg'],
+    transpilePackages: ['rc-util', 'rc-pagination', 'rc-picker', '@ant-design/icons-svg', 'rc-input'],
     webpack(config) {
         config.module.rules.push({
             test: /\.svg$/,
